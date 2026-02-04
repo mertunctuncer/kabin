@@ -12,11 +12,12 @@ internal class ReflectionServiceProvider(
 
     private val stack = ThreadLocal.withInitial { mutableSetOf<KType>() }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : Any> provide(type: KType): T? {
         return this.resolve(type) as? T
     }
 
-    private fun resolve(type: KType): Any? {
+    private fun resolve(type: KType): Any {
         return this.provider?.provide(type) ?: this.autoResolve(type)
     }
 

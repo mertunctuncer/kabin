@@ -38,7 +38,7 @@ class ReflectionServiceProviderTest {
         assertEquals("provided", got.s)
     }
 
-    private class RequiresUnresolvable(val x: CharSequence)
+    private class RequiresUnresolvable(@Suppress("unused") val x: CharSequence)
 
     private class OptionalParam(val x: CharSequence = "fallback")
 
@@ -63,8 +63,8 @@ class ReflectionServiceProviderTest {
         assertEquals("fallback", got.x)
     }
 
-    private class A(val b: B)
-    private class B(val a: A)
+    private class A(@Suppress("unused") val b: B)
+    private class B(@Suppress("unused") val a: A)
 
     @Test
     fun `detects circular dependencies`() {
@@ -88,6 +88,7 @@ class ReflectionServiceProviderTest {
         assertNotNull(ex.message)
     }
 
+    @Suppress("unused")
     private class InjectChosen private constructor(val chosen: String) {
         constructor() : this("primary-ish")
 
@@ -105,6 +106,7 @@ class ReflectionServiceProviderTest {
         assertEquals("inject:default", got.chosen)
     }
 
+    @Suppress("unused")
     private class MultipleInjectCtors {
         @Inject
         constructor()

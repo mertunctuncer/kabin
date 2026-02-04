@@ -32,6 +32,7 @@ class ModularServiceProvider: ServiceProvider {
         this.register(typeOf<T>(), SingletonFactory(instance))
     }
 
+    @Suppress("unused")
     inline fun <reified T : Any> register(noinline factory: () -> T) {
         this.register(typeOf<T>(), TransientFactory(factory))
     }
@@ -40,6 +41,7 @@ class ModularServiceProvider: ServiceProvider {
         this.register(ownerId, typeOf<T>(), SingletonFactory(instance))
     }
 
+    @Suppress("unused")
     inline fun <reified T : Any> register(ownerId: String, noinline factory: () -> T) {
         this.register(ownerId, typeOf<T>(), TransientFactory(factory))
     }
@@ -54,6 +56,7 @@ class ModularServiceProvider: ServiceProvider {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : Any> provide(type: KType): T? {
         return (
                 this.providers[type]?.factory?.provide()

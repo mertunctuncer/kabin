@@ -26,6 +26,7 @@ class ScopedServiceProvider: ServiceProvider {
 
     inline fun <reified T : Any> register(noinline factory: () -> T): Unit = this.register(TransientFactory(factory))
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T: Any> provide(type: KType): T? {
         return (
                 this.providers[type]?.provide()
